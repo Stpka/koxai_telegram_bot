@@ -7,6 +7,7 @@ from config import dp
 import sys
 sys.path.append('..')
 from db import dbFunc
+import botFunc
 
 
 class FSMAdmin(StatesGroup):
@@ -18,7 +19,10 @@ class FSMAdmin(StatesGroup):
 #@dp.message_handler(commands='da', state=None)
 async def cm_start(message : types.Message):
 	await FSMAdmin.Q1.set()
-	await message.answer('Зай, введи айдишник человека)')
+	if await botFunc.chmod(message.from_user.id):
+		await message.answer('Зай, введи айдишник человека)')
+	else: await state.finish()
+
 
 #@dp.message_handler(state=FSMAdmin)
 async def cm_sec(message: types.Message, state: FSMContext):
