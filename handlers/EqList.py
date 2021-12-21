@@ -44,7 +44,8 @@ async def final(message: types.Message, state: FSMContext):
 	
 	if eqipDbFunc.new_line(data['eq_id'], data['eq_name'], data['eq_cords']):
 		await message.answer('Учтём!')
-		await bot.send_message(chat_id=admin_id, text=f"Котик, {dbFunc.po_familii(message.from_user.id)} добавил новое оборудование!")
+		if message.from_user.id != admin_id:
+			await bot.send_message(chat_id=admin_id, text=f"Котик, {dbFunc.po_familii(message.from_user.id)} добавил новое оборудование!")
 
 	await state.finish()
 
