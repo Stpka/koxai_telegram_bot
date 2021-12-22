@@ -10,7 +10,7 @@ from db import dbFunc
 import botFunc
 
 
-class FSMAdmin(StatesGroup):
+class FSMAdminn(StatesGroup):
 	Q1 = State()
 	Q2 = State()
 	Q3 = State()
@@ -18,17 +18,18 @@ class FSMAdmin(StatesGroup):
 
 #@dp.message_handler(commands='da', state=None)
 async def cm_start(message : types.Message):
-	await FSMAdmin.Q1.set()
 	if await botFunc.chmod(message.from_user.id):
+		await FSMAdminn.Q1.set()
 		await message.answer('Зай, введи айдишник человека)')
-	else: await state.finish()
+	else: #await state.finish()
+		pass
 
 
 #@dp.message_handler(state=FSMAdmin)
 async def cm_sec(message: types.Message, state: FSMContext):
 	async with state.proxy() as data:
 		data['Q1']=message.text
-	await FSMAdmin.next()
+	await FSMAdminn.next()
 	await message.answer('Теперь введи новое имя)')
 
 
@@ -45,5 +46,5 @@ async def cm_therd(message: types.Message, state: FSMContext):
 
 def register_handlers_admin(dp : Dispatcher):
 	dp.register_message_handler(cm_start, commands=['upt'],state=None)
-	dp.register_message_handler(cm_sec, state=FSMAdmin.Q1)
-	dp.register_message_handler(cm_therd, state=FSMAdmin.Q2)
+	dp.register_message_handler(cm_sec, state=FSMAdminn.Q1)
+	dp.register_message_handler(cm_therd, state=FSMAdminn.Q2)

@@ -6,7 +6,7 @@ from config import admin_id, dp, bot
 
 import sys
 sys.path.append('..')
-import db.dbFunc
+from db import dbFunc
 
 
 async def echo(message: Message):
