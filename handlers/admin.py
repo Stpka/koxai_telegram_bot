@@ -48,3 +48,5 @@ def register_handlers_admin(dp : Dispatcher):
 	dp.register_message_handler(cm_start, commands=['upt'],state=None)
 	dp.register_message_handler(cm_sec, state=FSMAdminn.Q1)
 	dp.register_message_handler(cm_therd, state=FSMAdminn.Q2)
+
+

@@ -6,6 +6,9 @@ global cursor
 db = sqlite3.connect("data_base.db")
 cursor = db.cursor()
 
+
+
+
 #Создание таблицы
 # поддерживаемые типы данных -null, integer, real, text и blob
 cursor.execute("""CREATE TABLE IF NOT EXISTS users 

@@ -29,3 +29,11 @@ def print_db():
 	if len(out)>0:
 		return out
 	else: return 0
+
+
+def print_coord_eq(eq_id):
+	out = []
+	for i in cursor.execute(f'SELECT coord FROM equipment WHERE id = ?',(eq_id,)):
+		out+=[i]
+	if len(out)>0:	return out[0][0]
+	else:			return 0

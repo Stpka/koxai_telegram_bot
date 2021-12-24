@@ -4,7 +4,7 @@ import sys
 sys.path.append('..')
 from db import eqipDbFunc
 import botFunc
-
+from db import containerDbFunc
 from db import dbFunc
 
 from aiogram.types import Message
@@ -32,13 +32,17 @@ async def registration_user(message: types.Message):
 		await bot.send_message(chat_id=admin_id, text="Зай, у тебя +1 раб))")
 
 
+async def all_kits(message: types.Message):
+	await message.answer(containerDbFunc.kits())
+
+
 
 
 def register_handlers(dp : Dispatcher):
 	dp.register_message_handler(all_protocols, commands=['all', 'db'])
 	dp.register_message_handler(all_eqipment, commands=['alleq'])
 	dp.register_message_handler(registration_user, commands=['start'])
-	
+	dp.register_message_handler(all_kits, commands=['akit'])	
 
 
 
