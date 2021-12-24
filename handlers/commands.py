@@ -33,6 +33,7 @@ async def registration_user(message: types.Message):
 
 
 async def all_kits(message: types.Message):
+	'''Output DB for kits'''
 	await message.answer(containerDbFunc.kits())
 
 

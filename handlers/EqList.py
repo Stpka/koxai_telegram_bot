@@ -15,11 +15,8 @@ class FSMAdmin(StatesGroup):
 	eq_cords = State()
 
 
-
+#		Добовление нового оборудования
 async def frst(message : types.Message):
-	await message.answer('ВНИМАНИЕ!\nВесь далее вводимый текст записывайте в ОДНУ строку')
-	await message.answer('Зачем? ... Ну.... Знаете что?! Не вы бота делаете, так что мне решать, что вы будете вводить\
-		в одну строку, а что не будете!')
 	await FSMAdmin.eq_name.set()
 	await message.answer('Введите название оборудования')
 

@@ -24,9 +24,8 @@ class NewKit(StatesGroup):
 	id_content_kit = State()
 
 
-
+#		Создание нового набора
 async def frst(message : types.Message):
-	await message.answer('ВНИМАНИЕ!\nВесь далее вводимый текст записывайте в ОДНУ строку')
 	await NewKit.name_kit.set()
 	await message.answer('Введите название нового набора')
 
@@ -76,22 +75,27 @@ def register_handlers_kit(dp : Dispatcher):
 	dp.register_message_handler(final, state=NewKit.id_content_kit)
 
 
+
 class MadeKit(StatesGroup):
 	name_kit = State()
 	final_made_kit = State()
 
+#		Сборка имеющегося набора
 async def NameOfKit(message : types.Message):
 	await MadeKit.name_kit.set()
 	await MadeKit.next()
 	await message.answer('Введите название набора')
 
 async def Final(message: types.Message, state: FSMContext):
-	out = containerDbFunc.content_of_kit(message.text)[0]
-	ids = out[0].split(", ")	# Все индификаторы
-	names = out[1].split(", ")	# Все имена
+	if containerDbFunc.content_of_kit(message.text):
+		out = containerDbFunc.content_of_kit(message.text)[0]
+		ids = out[0].split(", ")	# Все индификаторы
+		names = out[1].split(", ")	# Все имена
 
-	for i in range(0,len(ids)):
-		await message.answer(f'<b>{names[i]}</b> храниться в <b>{eqipDbFunc.print_coord_eq(ids[i])}</b>', parse_mode=types.ParseMode.HTML)
+		for i in range(0,len(ids)):
+			await message.answer(f'<b>{names[i]}</b> храниться в <b>{eqipDbFunc.print_coord_eq(ids[i])}</b>', parse_mode=types.ParseMode.HTML)
+	else: await message.answer('Такого набора либо нет, либо его название было введено не правильно')
+
 	await state.finish()
 
 

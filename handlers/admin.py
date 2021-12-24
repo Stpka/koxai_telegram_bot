@@ -15,8 +15,7 @@ class FSMAdminn(StatesGroup):
 	Q2 = State()
 	Q3 = State()
 
-
-#@dp.message_handler(commands='da', state=None)
+#	Изменение поля title в бд, где храниться инфа о пользователях
 async def cm_start(message : types.Message):
 	if await botFunc.chmod(message.from_user.id):
 		await FSMAdminn.Q1.set()
@@ -25,7 +24,6 @@ async def cm_start(message : types.Message):
 		pass
 
 
-#@dp.message_handler(state=FSMAdmin)
 async def cm_sec(message: types.Message, state: FSMContext):
 	async with state.proxy() as data:
 		data['Q1']=message.text
@@ -33,7 +31,6 @@ async def cm_sec(message: types.Message, state: FSMContext):
 	await message.answer('Теперь введи новое имя)')
 
 
-#@dp.message_handler(state=FSMAdmin)
 async def cm_therd(message: types.Message, state: FSMContext):
 	async with state.proxy() as data:
 		data['Q2']=message.text

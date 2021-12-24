@@ -9,6 +9,8 @@ sys.path.append('..')
 from db import dbFunc
 from keyboards import kb_client
 
+
+#		эхо функция
 async def echo(message: Message):
 	text = 'Я тебя люблю)'
 	await message.reply(text=text, reply_markup=kb_client)
